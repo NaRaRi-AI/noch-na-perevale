@@ -11,7 +11,7 @@
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #020408;
-            color: #cbd5e1;
+            color: #00ffcc; /* Неоново-бирюзовый контрастный текст для отличной видимости на картинках */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -20,17 +20,20 @@
 
         h1, h2, h3, .font-mono-title {
             font-family: 'Special Elite', monospace;
+            color: #ff3366; /* Ярко-розовые заголовки с неоновой подсветкой */
+            text-shadow: 0 0 10px rgba(255, 51, 102, 0.6);
         }
 
         .glow-box {
-            box-shadow: 0 0 40px rgba(14, 165, 233, 0.05);
-            border: 1px solid rgba(14, 165, 233, 0.12);
-            background-color: rgba(15, 23, 42, 0.90);
-            backdrop-filter: blur(12px);
+            box-shadow: 0 0 30px rgba(0, 255, 204, 0.15);
+            border: 1px solid rgba(0, 255, 204, 0.3);
+            /* Полупрозрачная подложка, чтобы фоновая картинка просвечивала под текстом */
+            background-color: rgba(2, 6, 23, 0.65);
+            backdrop-filter: blur(8px);
         }
 
         .glow-button:hover {
-            box-shadow: 0 0 25px rgba(14, 165, 233, 0.2);
+            box-shadow: 0 0 25px rgba(0, 255, 204, 0.4);
         }
 
         @keyframes fadeIn {
@@ -45,9 +48,9 @@
 <body id="page-body" class="min-h-screen flex flex-col justify-between">
 
     <!-- Шапка -->
-    <header class="w-full py-5 px-4 text-center border-b border-sky-950/60 bg-black/80 backdrop-blur-md">
-        <span class="text-xs text-sky-500/70 tracking-widest uppercase font-semibold block mb-1">Следственное дело № 84-П / Грифом «Бессрочно»</span>
-        <h1 class="text-xl sm:text-2xl font-bold tracking-wider text-sky-400 font-mono-title drop-shadow-[0_0_12px_rgba(14,165,233,0.3)]">
+    <header class="w-full py-5 px-4 text-center border-b border-sky-950/60 bg-black/70 backdrop-blur-md">
+        <span class="text-xs text-sky-400/80 tracking-widest uppercase font-semibold block mb-1">Следственное дело № 84-П / Грифом «Бессрочно»</span>
+        <h1 class="text-xl sm:text-2xl font-bold tracking-wider text-pink-500 font-mono-title drop-shadow-[0_0_12px_rgba(255,51,102,0.4)]">
             Одна ночь на перевале
         </h1>
     </header>
@@ -60,7 +63,7 @@
     </main>
 
     <!-- Подвал -->
-    <footer class="w-full py-3 text-center text-xs text-slate-400 border-t border-slate-900/80 bg-black/60 backdrop-blur-sm">
+    <footer class="w-full py-3 text-center text-xs text-slate-300 border-t border-slate-900/80 bg-black/70 backdrop-blur-sm">
         Ураганный ветер стирает следы быстрее, чем они появляются на насте
     </footer>
 
@@ -255,9 +258,9 @@
             const body = document.getElementById('page-body');
             const data = storyData[currentState];
 
-            // Динамически меняем фоновое изображение с темным градиентом поверх для читаемости текста
+            // Меняем фоновое изображение для текущего шага
             if (data.bg) {
-                body.style.backgroundImage = `linear-gradient(rgba(2, 4, 8, 0.82), rgba(2, 4, 8, 0.92)), url('${data.bg}')`;
+                body.style.backgroundImage = `linear-gradient(rgba(2, 4, 8, 0.65), rgba(2, 4, 8, 0.82)), url('${data.bg}')`;
             }
 
             let html = `<div class="fade-in">`;
@@ -265,17 +268,17 @@
             if (data.isEnding) {
                 html += `
                     <div class="text-center">
-                        <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-sky-400 uppercase bg-sky-950/80 border border-sky-800/60 rounded-full">Архивное дело закрыто</span>
-                        <h2 class="text-xl sm:text-2xl font-bold text-sky-300 mb-3 font-mono-title">${data.endingTitle}</h2>
-                        <p class="text-slate-300 text-sm sm:text-base mb-6 leading-relaxed">${data.text}</p>
-                        <div class="bg-black/60 p-4 rounded-lg border border-slate-800 mb-8">
-                            <p class="text-sky-200/80 text-sm italic">${data.endingDesc}</p>
+                        <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-pink-400 uppercase bg-slate-950/80 border border-pink-900/60 rounded-full">Архивное дело закрыто</span>
+                        <h2 class="text-xl sm:text-2xl font-bold text-pink-400 mb-3 font-mono-title">${data.endingTitle}</h2>
+                        <p class="text-teal-100 text-sm sm:text-base mb-6 leading-relaxed">${data.text}</p>
+                        <div class="bg-black/60 p-4 rounded-lg border border-teal-900/50 mb-8">
+                            <p class="text-teal-300/90 text-sm italic">${data.endingDesc}</p>
                         </div>
                         <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                            <button onclick="restartGame()" class="px-6 py-3 bg-sky-600 hover:bg-sky-500 text-slate-950 font-bold rounded-lg transition-all glow-button uppercase tracking-wider text-xs">
+                            <button onclick="restartGame()" class="px-6 py-3 bg-pink-600 hover:bg-pink-500 text-slate-950 font-bold rounded-lg transition-all glow-button uppercase tracking-wider text-xs">
                                 Начать заново
                             </button>
-                            <button onclick="shareResult('${data.shareText}')" class="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-sky-300 font-semibold rounded-lg transition-all border border-sky-500/30 text-xs">
+                            <button onclick="shareResult('${data.shareText}')" class="px-6 py-3 bg-slate-900/90 hover:bg-slate-800 text-teal-300 font-semibold rounded-lg transition-all border border-teal-500/30 text-xs">
                                 Поделиться результатом
                             </button>
                         </div>
@@ -283,16 +286,16 @@
                 `;
             } else {
                 html += `
-                    <h2 class="text-lg sm:text-xl font-bold text-sky-400 mb-4 font-mono-title">${data.title}</h2>
-                    <p class="text-slate-300 text-sm sm:text-base mb-8 leading-relaxed">${data.text}</p>
+                    <h2 class="text-lg sm:text-xl font-bold text-pink-400 mb-4 font-mono-title">${data.title}</h2>
+                    <p class="text-teal-100 text-sm sm:text-base mb-8 leading-relaxed">${data.text}</p>
                     <div class="space-y-3">
                 `;
 
                 data.choices.forEach(choice => {
                     html += `
-                        <button onclick="makeChoice('${choice.next}')" class="w-full text-left p-4 rounded-lg bg-slate-800/90 hover:bg-sky-950/60 border border-slate-700/80 hover:border-sky-600/60 transition-all text-slate-200 hover:text-sky-200 text-sm sm:text-base flex items-center justify-between group">
+                        <button onclick="makeChoice('${choice.next}')" class="w-full text-left p-4 rounded-lg bg-slate-900/85 hover:bg-teal-950/60 border border-teal-900/60 hover:border-teal-500/60 transition-all text-teal-200 hover:text-white text-sm sm:text-base flex items-center justify-between group">
                             <span>${choice.text}</span>
-                            <span class="text-sky-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
+                            <span class="text-pink-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2">→</span>
                         </button>
                     `;
                 });
